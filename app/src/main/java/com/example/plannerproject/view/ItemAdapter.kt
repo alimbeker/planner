@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.plannerproject.HomeFragment
 import com.example.plannerproject.R
 import com.example.plannerproject.model.CardData
 
-class ItemAdapter(val c: Context, val cardList:ArrayList<CardData>): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>()
+class ItemAdapter(val c: Context, val cardList:List<CardData>): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>()
 {
 
     inner class ItemViewHolder(val v: View):RecyclerView.ViewHolder(v) {
@@ -23,11 +23,11 @@ class ItemAdapter(val c: Context, val cardList:ArrayList<CardData>): RecyclerVie
         val v = inflater.inflate(R.layout.list_item, parent, false)
         return ItemViewHolder(v)
     }
-
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val newList = cardList[position]
-        holder.name.text = newList.task
-        holder.name.text = newList.aboutTask
+        val iconGreen ="\uD83D\uDFE9 "
+        holder.name.text = iconGreen+" "+newList.task
+        holder.mbNum.text = newList.aboutTask
     }
 
     override fun getItemCount(): Int {

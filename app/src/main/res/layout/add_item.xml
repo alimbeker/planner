@@ -27,14 +27,38 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
         <EditText
             android:id="@+id/cardNo"
             android:hint="CARD"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_margin="15dp"
             android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/backCard"
+                android:layout_width="15mm"
+                android:backgroundTint="#f53649"
+                android:layout_height="wrap_content"
+                android:text="back"
+                android:layout_marginLeft="10dp"
+                />
+
+        <Button
+            android:id="@+id/saveCard"
+            android:layout_width="15mm"
+            android:layout_height="wrap_content"
+            android:text="save"
+            android:layout_marginLeft="150dp"/>
+
+        </LinearLayout>
+
     </LinearLayout>
+
 </LinearLayout>

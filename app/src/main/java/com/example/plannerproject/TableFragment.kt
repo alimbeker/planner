@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 
 
 class TableFragment : Fragment() {
+
     // TODO: Rename and change types of parameters
 
 
