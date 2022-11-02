@@ -6,11 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.plannerproject.HomeFragment
 import com.example.plannerproject.R
 import com.example.plannerproject.model.CardData
 
-class ItemAdapter(val c: Context, val cardList:List<CardData>): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>()
+class ItemAdapter(val c: Context?, val cardList:List<CardData>): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>()
 {
 
     inner class ItemViewHolder(val v: View):RecyclerView.ViewHolder(v) {
