@@ -42,10 +42,6 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <!--<androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Lrecycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>-->
 
     <TextView
         android:id="@+id/user"
@@ -53,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
 
-        android:text="💀 Asset Zhanedilov"
+        android:text="💀 Galymbek Batyrbek"
 
         android:textColor="#918F8F"
         android:textSize="21sp"
