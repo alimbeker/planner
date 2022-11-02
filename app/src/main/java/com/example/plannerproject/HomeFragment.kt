@@ -15,7 +15,7 @@ import com.example.plannerproject.model.CardData
 import com.example.plannerproject.view.ItemAdapter
 
 
-class HomeFragment : Fragment() {
+class  HomeFragment : Fragment() {
 
 
     override fun onCreateView(

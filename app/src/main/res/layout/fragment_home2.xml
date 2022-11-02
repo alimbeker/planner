@@ -9,6 +9,11 @@
     android:orientation="vertical"
     tools:context=".HomeFragment"
     >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
@@ -37,10 +42,6 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <!--<androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Lrecycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>-->
 
     <TextView
         android:id="@+id/user"
@@ -48,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
 
-        android:text="💀 Asset Zhanedilov"
+        android:text="💀 Galymbek Batyrbek"
 
         android:textColor="#918F8F"
         android:textSize="21sp"
@@ -80,9 +81,23 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    <!--<androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addingBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            android:tint="@color/white"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="MissingConstraints" />
+    </androidx.constraintlayout.widget.ConstraintLayout>-->
 </LinearLayout>
