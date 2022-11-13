@@ -8,8 +8,8 @@ import com.example.plannerproject.data.CardData
 
 
 class HomeFragmentView : ViewModel() {
-    val cards = ArrayList<CardData>()
-   /*private val cardslivedata = MutableLiveData<List<CardData>>()
+   /*private val cards = ArrayList<CardData>()
+   private val cardslivedata = MutableLiveData<List<CardData>>()
 
    fun insert(task:String,aboutTask:String): MutableLiveData<List<CardData>> {
      cards.add(CardData(task,aboutTask))
@@ -20,6 +20,7 @@ class HomeFragmentView : ViewModel() {
    fun loadCard(): MutableLiveData<List<CardData>> {
        return cardslivedata
    }*/
+
    companion object {
        var cards:MutableList<CardData> = mutableListOf()
    }

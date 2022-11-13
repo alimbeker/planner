@@ -8,10 +8,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import com.example.plannerproject.model.HomeFragmentView
 
 class AddCardDialogFragment : DialogFragment() {
-
+    private val viewModel: HomeFragmentView by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,7 +28,7 @@ class AddCardDialogFragment : DialogFragment() {
             val newCard = rootView.findViewById<EditText>(R.id.cardNo)
             val card = newCard.text.toString()
 
-            HomeFragmentView().insert(card,"Something new");
+            viewModel.insert(card,"Something new");
 
             Toast.makeText(context,"Succesfully added new $card card.",Toast.LENGTH_LONG).show()
             dismiss()

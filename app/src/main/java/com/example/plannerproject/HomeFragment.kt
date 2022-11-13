@@ -17,6 +17,7 @@ import com.example.plannerproject.model.HomeFragmentView
 import com.example.plannerproject.view.ItemAdapter
 
 
+
 class  HomeFragment : Fragment() {
     private val viewModel: HomeFragmentView by viewModels()
 
