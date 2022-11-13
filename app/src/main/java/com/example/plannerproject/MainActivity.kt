@@ -3,16 +3,13 @@ package com.example.plannerproject
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.FragmentResultListener
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
-import com.example.plannerproject.data.Cardsource
-import com.example.plannerproject.model.CardData
+import com.example.plannerproject.data.CardData
 import com.example.plannerproject.view.ItemAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView

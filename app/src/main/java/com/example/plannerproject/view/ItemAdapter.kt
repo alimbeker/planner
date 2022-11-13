@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plannerproject.R
-import com.example.plannerproject.model.CardData
+import com.example.plannerproject.data.CardData
 
 class ItemAdapter(val c: Context?, val cardList:List<CardData>): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>()
 {

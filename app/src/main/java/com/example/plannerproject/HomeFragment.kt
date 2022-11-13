@@ -7,16 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.plannerproject.data.Cardsource
-import com.example.plannerproject.model.CardData
+import com.example.plannerproject.model.Cardsource
+import com.example.plannerproject.data.CardData
+import com.example.plannerproject.model.HomeFragmentView
 import com.example.plannerproject.view.ItemAdapter
 
 
 class  HomeFragment : Fragment() {
-
+    private val viewModel: HomeFragmentView by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

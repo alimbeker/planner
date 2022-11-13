@@ -8,7 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.example.plannerproject.data.Cardsource
+import com.example.plannerproject.model.Cardsource
 
 class AddCardDialogFragment : DialogFragment() {
 

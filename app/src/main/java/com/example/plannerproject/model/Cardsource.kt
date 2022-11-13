@@ -1,7 +1,6 @@
-package com.example.plannerproject.data
+package com.example.plannerproject.model
 
-import com.example.plannerproject.model.CardData
-
+import com.example.plannerproject.data.CardData
 
 
 class Cardsource {
@@ -12,12 +11,12 @@ class Cardsource {
 
     fun insert(task:String,aboutTask:String):MutableList<CardData>{
         cards.add(CardData(task,aboutTask))
-        Cardsource.cards= cards
+       cards = cards
         return cards
     }
 
     fun loadCard(): List<CardData> {
-        return Cardsource.cards
+        return cards
     }
 
 }
