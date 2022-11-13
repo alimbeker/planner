@@ -8,7 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.example.plannerproject.model.Cardsource
+import com.example.plannerproject.model.HomeFragmentView
 
 class AddCardDialogFragment : DialogFragment() {
 
@@ -27,7 +27,7 @@ class AddCardDialogFragment : DialogFragment() {
             val newCard = rootView.findViewById<EditText>(R.id.cardNo)
             val card = newCard.text.toString()
 
-            Cardsource().insert(card,"Something new");
+            HomeFragmentView().insert(card,"Something new");
 
             Toast.makeText(context,"Succesfully added new $card card.",Toast.LENGTH_LONG).show()
             dismiss()

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plannerproject.model.Cardsource
@@ -31,7 +32,7 @@ class  HomeFragment : Fragment() {
 
 
         // show all recycleView cards
-        var cards = Cardsource().loadCard()
+        var cards = viewModel.loadCard()
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
 
         //method for generate cardList Adapter
@@ -43,7 +44,7 @@ class  HomeFragment : Fragment() {
 
         recyclerView.setHasFixedSize(true)
 
-        // search tab
+      /*  // search tab
         val searchView = view.findViewById<SearchView>(R.id.searchView)
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -70,7 +71,7 @@ class  HomeFragment : Fragment() {
             }
 
 
-        })
+        })*/
 
         link.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_tableFragment) }
         return view
