@@ -5,11 +5,11 @@ import com.example.plannerproject.data.CardData
 
 class Cardsource {
 
-    companion object{
+   /* companion object {
         var cards:MutableList<CardData> = mutableListOf()
     }
 
-    fun insert(task:String,aboutTask:String):MutableList<CardData>{
+    fun insert(task:String,aboutTask:String):MutableList<CardData> {
         cards.add(CardData(task,aboutTask))
        cards = cards
         return cards
@@ -17,6 +17,6 @@ class Cardsource {
 
     fun loadCard(): List<CardData> {
         return cards
-    }
+    }*/
 
 }

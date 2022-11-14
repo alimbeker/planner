@@ -45,7 +45,7 @@ class  HomeFragment : Fragment() {
 
         recyclerView.setHasFixedSize(true)
 
-      /*  // search tab
+       // search tab
         val searchView = view.findViewById<SearchView>(R.id.searchView)
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -72,7 +72,7 @@ class  HomeFragment : Fragment() {
             }
 
 
-        })*/
+        })
 
         link.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_tableFragment) }
         return view

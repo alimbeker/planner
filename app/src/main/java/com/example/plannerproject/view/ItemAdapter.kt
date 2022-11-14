@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plannerproject.R
 import com.example.plannerproject.data.CardData
 
-class ItemAdapter(val c: Context?, val cardList:List<CardData>): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>()
+class ItemAdapter(val c: Context?, val cardList:MutableList<CardData>): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>()
 {
 
     inner class ItemViewHolder(val v: View):RecyclerView.ViewHolder(v) {
