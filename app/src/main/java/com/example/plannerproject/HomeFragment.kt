@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
@@ -19,7 +20,7 @@ import com.example.plannerproject.view.ItemAdapter
 
 
 class  HomeFragment : Fragment() {
-    private val viewModel: HomeFragmentView by viewModels()
+    private val viewModel: HomeFragmentView by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,46 +34,48 @@ class  HomeFragment : Fragment() {
 
 
         // show all recycleView cards
-        var cards = viewModel.loadCard()
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
 
         //method for generate cardList Adapter
-        fun getList(list: MutableList<CardData>): ItemAdapter {
+        fun getList(list: List<CardData>): ItemAdapter {
             return ItemAdapter(this.context, list)
         }
 
-        recyclerView.adapter = getList(cards as MutableList<CardData>)
+        viewModel.cardsLiveData.observe(viewLifecycleOwner) {
+            recyclerView.adapter = getList(it as List<CardData>)
+        }
 
         recyclerView.setHasFixedSize(true)
 
-       // search tab
-        val searchView = view.findViewById<SearchView>(R.id.searchView)
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            val tempList: MutableList<CardData> = cards as MutableList<CardData>
-
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                searchView.clearFocus()
-                cards = tempList
-                cards = cards.filter { el ->
-                    el.task.toString().lowercase() == p0.toString().lowercase()
-                }
-                recyclerView.adapter = getList(cards as MutableList<CardData>)
-                return true
-            }
-
-            override fun onQueryTextChange(p0: String?): Boolean {
-                cards = tempList
-                cards = cards.filter { el ->
-                    el.task.toString().lowercase()
-                        .contains(p0.toString().lowercase(), ignoreCase = true)
-                }
-                recyclerView.adapter = getList(cards as MutableList<CardData>)
-                return true
-            }
-
-
-        })
+//       // search tab
+//        val searchView = view.findViewById<SearchView>(R.id.searchView)
+//
+//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            val tempList: MutableList<CardData> = cards as MutableList<CardData>
+//
+//            override fun onQueryTextSubmit(p0: String?): Boolean {
+//                searchView.clearFocus()
+//                cards = tempList
+//                cards = cards.filter { el ->
+//                    el.task.toString().lowercase() == p0.toString().lowercase()
+//                }
+//                recyclerView.adapter = getList(cards as MutableList<CardData>)
+//                return true
+//            }
+//
+//            override fun onQueryTextChange(p0: String?): Boolean {
+//                cards = tempList
+//                cards = cards.filter { el ->
+//                    el.task.toString().lowercase()
+//                        .contains(p0.toString().lowercase(), ignoreCase = true)
+//                }
+//                recyclerView.adapter = getList(cards as MutableList<CardData>)
+//                return true
+//            }
+//
+//
+//        })
 
         link.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_tableFragment) }
         return view

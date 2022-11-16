@@ -8,11 +8,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.example.plannerproject.model.HomeFragmentView
 
 class AddCardDialogFragment : DialogFragment() {
-    private val viewModel: HomeFragmentView by viewModels()
+    private val viewModel: HomeFragmentView by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
