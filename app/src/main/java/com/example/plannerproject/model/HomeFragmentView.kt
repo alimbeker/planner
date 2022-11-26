@@ -1,20 +1,28 @@
 package com.example.plannerproject.model
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.plannerproject.HomeFragment
+import android.app.Application
+import androidx.lifecycle.*
 import com.example.plannerproject.data.CardData
+import com.example.plannerproject.database.CardDatabase
+import com.example.plannerproject.database.CardEntity
+import kotlinx.coroutines.launch
 
 
-class HomeFragmentView : ViewModel() {
-    val cardsLiveData = MutableLiveData<List<CardData>>()
-         private var cards: MutableList<CardData> = mutableListOf()
+class HomeFragmentView(private val database:CardDatabase,application: Application) : AndroidViewModel(application) {
 
-     fun insert(task:String,aboutTask:String):MutableList<CardData> {
-         cards.add(CardData(task,aboutTask))
-         cardsLiveData.value = cards
-         return cards
+    val cardsLiveData = database.cardDatabaseDao.getAll()
+
+    fun onClickInsert() {
+        viewModelScope.launch {
+            insert("", "")
+        }
+    }
+
+     suspend fun insert(task:String, aboutTask:String) {
+         database.cardDatabaseDao.insert(CardEntity(task,aboutTask))
      }
+
+
+
 
 }
