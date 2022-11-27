@@ -9,7 +9,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
-import com.example.plannerproject.data.CardData
 import com.example.plannerproject.view.ItemAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
@@ -17,7 +16,6 @@ import com.google.android.material.navigation.NavigationView
 class MainActivity : AppCompatActivity() {
     private lateinit var addsBtn:FloatingActionButton
     private lateinit var recv:RecyclerView
-    private lateinit var cardList:ArrayList<CardData>
     private lateinit var itemAdapter:ItemAdapter
     lateinit var toggle: ActionBarDrawerToggle
     private lateinit var navController: NavController

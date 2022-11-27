@@ -1,17 +1,21 @@
 package com.example.plannerproject.database
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
-import com.example.plannerproject.data.CardData
 
+// Data access object
 @Dao
 interface CardDao {
 
+    //insert new CardEntity
     @Insert
     suspend fun insert(card: CardEntity)
 
+//     get all Cards
     @Query("Select * from cardTable")
-    fun getAll(): LiveData<List<CardEntity>>
+    fun getAll(): LiveData<MutableList<CardEntity>>
+
+    @Delete
+   suspend fun delete(card: CardEntity)
 
 }

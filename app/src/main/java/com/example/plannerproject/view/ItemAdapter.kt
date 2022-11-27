@@ -5,13 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plannerproject.R
-import com.example.plannerproject.data.CardData
 import com.example.plannerproject.database.CardEntity
 
-class ItemAdapter(val c: Context?, val cardList:List<CardEntity>): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>()
+class ItemAdapter(val c: Context?, val cardList:MutableList<CardEntity>): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>()
 {
 
     inner class ItemViewHolder(val v: View):RecyclerView.ViewHolder(v) {

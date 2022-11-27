@@ -8,16 +8,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import com.example.plannerproject.data.CardData
 import com.example.plannerproject.database.CardDatabase
-import com.example.plannerproject.database.CardEntity
 import com.example.plannerproject.model.HomeFragmentView
 import com.example.plannerproject.model.VmFactory
-import kotlinx.coroutines.launch
 
 class AddCardDialogFragment : DialogFragment() {
 
@@ -39,12 +33,12 @@ class AddCardDialogFragment : DialogFragment() {
         val vm = ViewModelProvider(this,vmFactory).get(HomeFragmentView::class.java)
 
         rootView.findViewById<Button>(R.id.saveCard).setOnClickListener {
-            val newCard = rootView.findViewById<EditText>(R.id.cardNo)
-            val card = newCard.text.toString()
+            val newCardTask = rootView.findViewById<EditText>(R.id.newCardTask).text.toString()
+            val newCardDesc = rootView.findViewById<EditText>(R.id.newCardDesc).text.toString()
 
-            vm.onClickInsert(card,"Something new")
+            vm.onClickInsert(newCardTask,newCardDesc)
 
-            Toast.makeText(context,"Succesfully added new $card card.",Toast.LENGTH_LONG).show()
+            Toast.makeText(context,"Succesfully added new $newCardTask card.",Toast.LENGTH_LONG).show()
             dismiss()
         }
 

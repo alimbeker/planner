@@ -1,23 +1,23 @@
 package com.example.plannerproject
 
+import SwipeToDelete
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.TextView
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.plannerproject.data.CardData
 import com.example.plannerproject.database.CardDatabase
 import com.example.plannerproject.database.CardEntity
 import com.example.plannerproject.model.HomeFragmentView
 import com.example.plannerproject.model.VmFactory
 import com.example.plannerproject.view.ItemAdapter
-
 
 
 class  HomeFragment : Fragment() {
@@ -40,18 +40,30 @@ class  HomeFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
 
         //method for generate cardList Adapter
-        fun getList(list: List<CardEntity>): ItemAdapter {
+        fun getList(list: MutableList<CardEntity>): ItemAdapter {
             return ItemAdapter(this.context, list)
         }
 
 
         vm.cardsLiveData.observe(viewLifecycleOwner) {
-            print(it)
-            recyclerView.adapter = getList(it as List<CardEntity>)
+            recyclerView.adapter = getList(it as MutableList<CardEntity>)
         }
 
-
         recyclerView.setHasFixedSize(true)
+
+        val swipeToDelete = object :SwipeToDelete(){
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val a = vm.cardsLiveData.value?.get(position)
+                vm.onSwipeDelete(a)
+                vm.cardsLiveData.observe(viewLifecycleOwner) {
+                    recyclerView.adapter = getList(it as MutableList<CardEntity>)
+                }
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(swipeToDelete)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
 
 
        // search tab
