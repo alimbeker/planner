@@ -6,9 +6,13 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.plannerproject.database.CardDatabase
+import com.example.plannerproject.model.HomeFragmentView
+import com.example.plannerproject.model.VmFactory
 import com.example.plannerproject.view.ItemAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
@@ -26,6 +30,12 @@ class MainActivity : AppCompatActivity() {
 
         val drawerLayout:DrawerLayout = findViewById(R.id.drawerLayout)
         val navView: NavigationView= findViewById(R.id.nav_view)
+
+        //ViewModel
+        val application = requireNotNull(this).application
+        val dataSource = CardDatabase.getInstance(application)!!.cardDao()
+        val vmFactory = VmFactory(dataSource,application)
+        val vm = ViewModelProvider(this,vmFactory).get(HomeFragmentView::class.java)
 
         toggle= ActionBarDrawerToggle(this,drawerLayout,R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
@@ -53,6 +63,11 @@ class MainActivity : AppCompatActivity() {
         var addCardBtn = findViewById<FloatingActionButton>(R.id.addingBtn)
         addCardBtn.setOnClickListener {
             showAddCardFragment( );
+        }
+
+        val deleteAll = findViewById<FloatingActionButton>(R.id.deleteAll)
+        deleteAll.setOnClickListener {
+            vm.onClear()
         }
 
 

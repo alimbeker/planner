@@ -16,6 +16,19 @@ class HomeFragmentView( val database: CardDao , application: Application) : Andr
         }
     }
 
+    fun onClear() {
+        viewModelScope.launch {
+            clear()
+//            cardsLiveData.value? = null
+        }
+    }
+
+    suspend fun clear() {
+        database.clear()
+    }
+
+
+
      suspend fun insert(task:String, aboutTask:String) {
          database.insert(CardEntity(task,aboutTask))
      }
