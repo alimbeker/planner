@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.TextView
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -69,35 +70,25 @@ class  HomeFragment : Fragment() {
        // search tab
         val searchView = view.findViewById<SearchView>(R.id.searchView)
 
-//        var cards = viewModel.cards;
-//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            val tempList: MutableList<CardData> = cards
-//
-//            override fun onQueryTextSubmit(p0: String?): Boolean {
-//                searchView.clearFocus()
-//                cards = tempList
-//                cards = cards.filter { el ->
-//                    el.task.toString().lowercase() == p0.toString().lowercase()
-//                } as MutableList<CardData>
-//                viewModel.convertToLiveData(cards)
-//                callViewModelLiveData()
-//                return true
-//            }
-//
-//            override fun onQueryTextChange(p0: String?): Boolean {
-//                cards = tempList
-//                cards = cards.filter { el ->
-//                    el.task.toString().lowercase()
-//                        .contains(p0.toString().lowercase(), ignoreCase = true)
-//                }as MutableList<CardData>
-//                viewModel.convertToLiveData(cards)
-//                callViewModelLiveData()
-//                return true
-//            }
-//
-//
-//        })
-//
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                searchView.clearFocus()
+                vm.cardsLiveData.observe(viewLifecycleOwner) {
+                    recyclerView.adapter = getList((it.filter { el->el.task.lowercase()==p0.toString().lowercase() } as MutableList<CardEntity>?)!!)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                vm.cardsLiveData.observe(viewLifecycleOwner) {
+                    recyclerView.adapter = getList((it.filter { el->el.task.lowercase().contains(p0.toString().lowercase(),ignoreCase = true)} as MutableList<CardEntity>?)!!)
+                }
+                return true
+            }
+
+
+        })
+
         link.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_tableFragment) }
         return view
     }

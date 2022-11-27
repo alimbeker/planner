@@ -19,7 +19,6 @@ class HomeFragmentView( val database: CardDao , application: Application) : Andr
     fun onClear() {
         viewModelScope.launch {
             clear()
-//            cardsLiveData.value? = null
         }
     }
 
