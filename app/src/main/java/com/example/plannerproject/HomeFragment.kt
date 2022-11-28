@@ -46,20 +46,16 @@ class  HomeFragment : Fragment() {
         }
 
 
-        vm.cardsLiveData.observe(viewLifecycleOwner) {
+        vm.filteredCards.observe(viewLifecycleOwner) {
             recyclerView.adapter = getList(it as MutableList<CardEntity>)
         }
 
         recyclerView.setHasFixedSize(true)
-
         val swipeToDelete = object :SwipeToDelete(){
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-                val a = vm.cardsLiveData.value?.get(position)
+                val a = vm.filteredCards.value?.get(position)
                 vm.onSwipeDelete(a)
-                vm.cardsLiveData.observe(viewLifecycleOwner) {
-                    recyclerView.adapter = getList(it as MutableList<CardEntity>)
-                }
             }
         }
 
@@ -71,18 +67,13 @@ class  HomeFragment : Fragment() {
         val searchView = view.findViewById<SearchView>(R.id.searchView)
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
+            override fun onQueryTextSubmit(text: String?): Boolean {
                 searchView.clearFocus()
-                vm.cardsLiveData.observe(viewLifecycleOwner) {
-                    recyclerView.adapter = getList((it.filter { el->el.task.lowercase()==p0.toString().lowercase() } as MutableList<CardEntity>?)!!)
-                }
                 return true
             }
 
-            override fun onQueryTextChange(p0: String?): Boolean {
-                vm.cardsLiveData.observe(viewLifecycleOwner) {
-                    recyclerView.adapter = getList((it.filter { el->el.task.lowercase().contains(p0.toString().lowercase(),ignoreCase = true)} as MutableList<CardEntity>?)!!)
-                }
+            override fun onQueryTextChange(text: String?): Boolean {
+                vm.onQueryTextChange(text)
                 return true
             }
 
