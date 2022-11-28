@@ -7,12 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plannerproject.database.CardDatabase
 import com.example.plannerproject.database.CardEntity
@@ -22,6 +24,8 @@ import com.example.plannerproject.view.ItemAdapter
 
 
 class  HomeFragment : Fragment() {
+
+    lateinit var newAdapter:ItemAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,15 +43,11 @@ class  HomeFragment : Fragment() {
 
         // show all recycleView cards
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
-
-        //method for generate cardList Adapter
-        fun getList(list: MutableList<CardEntity>): ItemAdapter {
-            return ItemAdapter(this.context, list)
-        }
-
-
         vm.filteredCards.observe(viewLifecycleOwner) {
-            recyclerView.adapter = getList(it as MutableList<CardEntity>)
+            newAdapter= ItemAdapter()
+            newAdapter.submitList(it)
+            recyclerView.adapter=newAdapter
+            recyclerView.layoutManager=LinearLayoutManager(this.context)
         }
 
         recyclerView.setHasFixedSize(true)
@@ -71,15 +71,11 @@ class  HomeFragment : Fragment() {
                 searchView.clearFocus()
                 return true
             }
-
             override fun onQueryTextChange(text: String?): Boolean {
                 vm.onQueryTextChange(text)
                 return true
             }
-
-
         })
-
         link.setOnClickListener { findNavController().navigate(R.id.action_homeFragment_to_tableFragment) }
         return view
     }

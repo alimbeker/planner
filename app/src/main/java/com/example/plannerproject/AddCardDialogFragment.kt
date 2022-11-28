@@ -43,11 +43,6 @@ class AddCardDialogFragment : DialogFragment() {
             dismiss()
         }
 
-        /*rootView.findViewById<ImageView>(R.id.more).setOnClickListener {
-            vm.onClickDelete()
-        }*/
-
-
         return  rootView
     }
     companion object{

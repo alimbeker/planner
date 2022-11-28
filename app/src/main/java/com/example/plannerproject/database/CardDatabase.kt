@@ -32,4 +32,6 @@ abstract class CardDatabase : RoomDatabase() {
             }
         }
     }
+
+
 }
