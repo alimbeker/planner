@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -18,9 +19,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plannerproject.database.CardDatabase
 import com.example.plannerproject.database.CardEntity
+import com.example.plannerproject.databinding.ActivityMainBinding
+import com.example.plannerproject.databinding.FragmentHome2Binding
+import com.example.plannerproject.databinding.ListItemBinding
+import com.example.plannerproject.databinding.NavHeaderBinding
 import com.example.plannerproject.model.HomeFragmentView
 import com.example.plannerproject.model.VmFactory
 import com.example.plannerproject.view.ItemAdapter
+import kotlinx.android.synthetic.main.fragment_home2.*
 
 
 class  HomeFragment : Fragment() {
@@ -34,14 +40,17 @@ class  HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home2, container, false)
         val link = view.findViewById<TextView>(R.id.table)
-
+        val binding:FragmentHome2Binding = FragmentHome2Binding.bind(view)
         //implement viewModel
         val application = requireNotNull(this.activity).application
         val dataSource = CardDatabase.getInstance(application)!!.cardDao()
         val vmFactory = VmFactory(dataSource,application)
         val vm = ViewModelProvider(this,vmFactory).get(HomeFragmentView::class.java)
 
+
+
         // show all recycleView cards
+//        val recyclerView = binding.recyclerView
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
         vm.filteredCards.observe(viewLifecycleOwner) {
             newAdapter= ItemAdapter()
@@ -64,8 +73,8 @@ class  HomeFragment : Fragment() {
 
 
        // search tab
+//        val searchView = binding.searchView
         val searchView = view.findViewById<SearchView>(R.id.searchView)
-
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(text: String?): Boolean {
                 searchView.clearFocus()

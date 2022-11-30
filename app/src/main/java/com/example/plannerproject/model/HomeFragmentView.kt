@@ -1,8 +1,11 @@
 package com.example.plannerproject.model
 
+import MarsProperty
 import android.app.Application
 import android.provider.SyncStateContract.Helpers.insert
+import android.util.Log
 import androidx.lifecycle.*
+import com.example.plannerproject.api.MarsApiService
 import com.example.plannerproject.database.CardDao
 import com.example.plannerproject.database.CardEntity
 import kotlinx.coroutines.launch
@@ -69,4 +72,27 @@ class HomeFragmentView( val database: CardDao , application: Application) : Andr
     fun onQueryTextChange(text: String?) {
         this.text.value = text
     }
+    //Retrofit
+    private val _property = MutableLiveData<List<MarsProperty>>()
+    val property:LiveData<List<MarsProperty>> = _property
+
+    private val _response = MutableLiveData<String>()
+    val response: LiveData<String> = _response
+
+    init {
+        viewModelScope.launch {
+            getMarsRealEstateProperties()
+        }
+    }
+
+    private suspend fun getMarsRealEstateProperties() {
+        try {
+            val listResult = MarsApiService.MarsApi.retrofitService.getProperties()
+            _response.value = "Success: ${listResult.size} Mars properties retrieved"
+            _property.value = listResult
+        } catch (e: Exception) {
+            _response.value = "Failure: ${e.message}"
+        }
+    }
+
 }

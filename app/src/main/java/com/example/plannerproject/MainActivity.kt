@@ -11,6 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plannerproject.database.CardDatabase
+import com.example.plannerproject.databinding.ActivityMainBinding
 import com.example.plannerproject.model.HomeFragmentView
 import com.example.plannerproject.model.VmFactory
 import com.example.plannerproject.view.ItemAdapter
@@ -18,9 +19,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var addsBtn:FloatingActionButton
-    private lateinit var recv:RecyclerView
-    private lateinit var itemAdapter:ItemAdapter
     lateinit var toggle: ActionBarDrawerToggle
     private lateinit var navController: NavController
 
@@ -28,9 +26,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val drawerLayout:DrawerLayout = findViewById(R.id.drawerLayout)
-        val navView: NavigationView= findViewById(R.id.nav_view)
+//        val binding:ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
+        val drawerLayout:DrawerLayout = findViewById(R.id.activityMain)
+        val navView: NavigationView= findViewById(R.id.nav_view)
         //ViewModel
         val application = requireNotNull(this).application
         val dataSource = CardDatabase.getInstance(application)!!.cardDao()

@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.plannerproject.database.CardDatabase
+import com.example.plannerproject.databinding.AddItemBinding
 import com.example.plannerproject.model.HomeFragmentView
 import com.example.plannerproject.model.VmFactory
 
@@ -23,26 +24,30 @@ class AddCardDialogFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         var rootView:View = inflater.inflate(R.layout.add_item,container,false)
-        rootView.findViewById<Button>(R.id.backCard).setOnClickListener {
+        var binding:AddItemBinding = AddItemBinding.bind(rootView)
+
+        binding.backCard.setOnClickListener {
             dismiss()
         }
-
         //implement viewModel
         val application = requireNotNull(this.activity).application
         val dataSource = CardDatabase.getInstance(application)!!.cardDao()
         val vmFactory = VmFactory(dataSource,application)
         val vm = ViewModelProvider(this,vmFactory).get(HomeFragmentView::class.java)
 
-        rootView.findViewById<Button>(R.id.saveCard).setOnClickListener {
+        binding.saveCard.setOnClickListener {
             val newCardTask = rootView.findViewById<EditText>(R.id.newCardTask).text.toString()
             val newCardDesc = rootView.findViewById<EditText>(R.id.newCardDesc).text.toString()
 
-            vm.onClickInsert(newCardTask,newCardDesc)
+            vm.property.observe(viewLifecycleOwner){
+                for(i in 0..10){
+                    vm.onClickInsert(it[i].id,it[i].type)
+                }
+            }
 
             Toast.makeText(context,"Succesfully added new $newCardTask card.",Toast.LENGTH_LONG).show()
             dismiss()
         }
-
         return  rootView
     }
     companion object{
