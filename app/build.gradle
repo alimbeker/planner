@@ -1,7 +1,11 @@
-plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-}
+//plugins {
+//    id 'com.android.application'
+//    id 'org.jetbrains.kotlin.android'
+//}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     namespace 'com.example.plannerproject'
@@ -13,7 +17,6 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -30,6 +33,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+//        dataBinding true
+    }
+
 }
 
 dependencies {
@@ -40,9 +48,36 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$supportlibVersion"
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation "com.google.android.material:material:1.2.1"
+    implementation "com.google.android.material:material:1.3.1"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
     implementation "com.google.android.material:material:$version"
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    // LiveData
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    // ViewModel
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation 'androidx.room:room-common:2.4.2'
+    // Room and Lifecycle dependencies
+    implementation "androidx.room:room-runtime:2.4.3"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+    kapt "androidx.room:room-compiler:2.4.3"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    // Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:2.4.3"
+    //Android KTX
+    implementation 'androidx.core:core-ktx:1.3.1'
+    //design
+    //noinspection GradleCompatible
+    implementation 'com.android.support:design:28.0.0-rc01'
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-scalars:2.9.0"
+    //Moshi
+    implementation "com.squareup.moshi:moshi-kotlin:1.14.0"
+    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
+    implementation "com.android.databinding:viewbinding:7.3.1"
 }

@@ -6,11 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.example.plannerproject.data.Cardsource
+import androidx.lifecycle.ViewModelProvider
+import com.example.plannerproject.database.CardDatabase
+import com.example.plannerproject.databinding.AddItemBinding
+import com.example.plannerproject.model.HomeFragmentView
+import com.example.plannerproject.model.VmFactory
 
 class AddCardDialogFragment : DialogFragment() {
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -18,30 +24,34 @@ class AddCardDialogFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         var rootView:View = inflater.inflate(R.layout.add_item,container,false)
+        var binding:AddItemBinding = AddItemBinding.bind(rootView)
 
-
-        rootView.findViewById<Button>(R.id.backCard).setOnClickListener {
+        binding.backCard.setOnClickListener {
             dismiss()
         }
-        rootView.findViewById<Button>(R.id.saveCard).setOnClickListener {
-            val newCard = rootView.findViewById<EditText>(R.id.cardNo)
-            val card = newCard.text.toString()
+        //implement viewModel
+        val application = requireNotNull(this.activity).application
+        val dataSource = CardDatabase.getInstance(application)!!.cardDao()
+        val vmFactory = VmFactory(dataSource,application)
+        val vm = ViewModelProvider(this,vmFactory).get(HomeFragmentView::class.java)
 
-            Cardsource().insert(card,"Something new");
+        binding.saveCard.setOnClickListener {
+            val newCardTask = rootView.findViewById<EditText>(R.id.newCardTask).text.toString()
+            val newCardDesc = rootView.findViewById<EditText>(R.id.newCardDesc).text.toString()
 
-            Toast.makeText(context,"Succesfully added new $card card.",Toast.LENGTH_LONG).show()
+            vm.property.observe(viewLifecycleOwner){
+                for(i in 0..10){
+                    vm.onClickInsert(it[i].id,it[i].type)
+                }
+            }
+
+            Toast.makeText(context,"Succesfully added new $newCardTask card.",Toast.LENGTH_LONG).show()
             dismiss()
         }
-
-
-
         return  rootView
     }
-
     companion object{
         @JvmStatic val TAG = AddCardDialogFragment::class.java.simpleName
-        @JvmStatic val REQUEST_KEY = "$TAG:defaultRequestKey"
-        @JvmStatic val KEY_RESPONSE = "RESPONSE"
     }
 
 }
