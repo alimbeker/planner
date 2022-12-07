@@ -10,11 +10,6 @@ import com.example.plannerproject.R
 import com.example.plannerproject.databinding.ListItemBinding
 
 class ItemAdapter:ListAdapter<CardEntity,ItemAdapter.ViewHolder>(CardDiffCallback()){
-     var data =  listOf<CardEntity>()
-         set(value) {
-             field = value
-             notifyDataSetChanged()
-         }
 
      class ViewHolder(private val binding:ListItemBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(card:CardEntity)=with(binding){
@@ -31,17 +26,12 @@ class ItemAdapter:ListAdapter<CardEntity,ItemAdapter.ViewHolder>(CardDiffCallbac
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.list_item,parent,false)
         return ViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-
-    override fun getItemCount() = data.size
-
 }
 class CardDiffCallback: DiffUtil.ItemCallback<CardEntity>() {
     override fun areItemsTheSame(oldItem: CardEntity, newItem: CardEntity): Boolean {

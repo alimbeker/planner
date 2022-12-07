@@ -39,11 +39,7 @@ class AddCardDialogFragment : DialogFragment() {
             val newCardTask = rootView.findViewById<EditText>(R.id.newCardTask).text.toString()
             val newCardDesc = rootView.findViewById<EditText>(R.id.newCardDesc).text.toString()
 
-            vm.property.observe(viewLifecycleOwner){
-                for(i in 0..10){
-                    vm.onClickInsert(it[i].id,it[i].type)
-                }
-            }
+            vm.onClickInsert(newCardTask,newCardDesc)
 
             Toast.makeText(context,"Succesfully added new $newCardTask card.",Toast.LENGTH_LONG).show()
             dismiss()
