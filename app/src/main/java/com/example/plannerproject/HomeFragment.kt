@@ -1,6 +1,7 @@
 package com.example.plannerproject
 
 import SwipeToDelete
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -40,7 +41,7 @@ class  HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home2, container, false)
         val link = view.findViewById<TextView>(R.id.table)
-        val binding:FragmentHome2Binding = FragmentHome2Binding.bind(view)
+        /*val binding:FragmentHome2Binding = FragmentHome2Binding.bind(view)*/
         //implement viewModel
         val application = requireNotNull(this.activity).application
         val dataSource = CardDatabase.getInstance(application)!!.cardDao()
@@ -57,7 +58,14 @@ class  HomeFragment : Fragment() {
             newAdapter.submitList(it)
             recyclerView.adapter=newAdapter
             recyclerView.layoutManager=LinearLayoutManager(this.context)
+            newAdapter.onItemClick = {
+                val intent = Intent(this.context, TableActivity::class.java)
+                intent.putExtra("cards", it)
+                startActivity(intent)
+            }
         }
+
+
 
         recyclerView.setHasFixedSize(true)
         val swipeToDelete = object :SwipeToDelete(){
@@ -72,7 +80,7 @@ class  HomeFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
 
-       // search tab
+        // search tab
 //        val searchView = binding.searchView
         val searchView = view.findViewById<SearchView>(R.id.searchView)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
