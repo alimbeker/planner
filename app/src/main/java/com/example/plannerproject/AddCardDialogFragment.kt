@@ -10,10 +10,14 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.workDataOf
 import com.example.plannerproject.database.CardDatabase
 import com.example.plannerproject.databinding.AddItemBinding
 import com.example.plannerproject.model.HomeFragmentView
 import com.example.plannerproject.model.VmFactory
+import java.util.concurrent.TimeUnit
 
 class AddCardDialogFragment : DialogFragment() {
 
@@ -42,6 +46,18 @@ class AddCardDialogFragment : DialogFragment() {
             vm.onClickInsert(newCardTask,newCardDesc)
 
             Toast.makeText(context,"Succesfully added new $newCardTask card.",Toast.LENGTH_LONG).show()
+
+            val myWorkRequest = OneTimeWorkRequestBuilder<TodoWorker>()
+                .setInitialDelay(10, TimeUnit.SECONDS)
+                .setInputData(
+                    workDataOf(
+                    "title" to "Todo Created",
+                    "message" to "A new todo has been created!")
+                )
+                .build()
+            WorkManager.getInstance(requireContext()).enqueue(myWorkRequest)
+
+
             dismiss()
         }
         return  rootView
