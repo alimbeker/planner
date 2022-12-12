@@ -13,7 +13,8 @@ data class CardEntity (
     val task:String,
 
     @ColumnInfo(name="cardDesc")
-    val aboutTask:String
+    val description:String
+
 
 )
 {

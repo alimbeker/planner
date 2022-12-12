@@ -1,8 +1,6 @@
 package com.example.plannerproject.model
 
-import MarsProperty
 import android.app.Application
-import android.provider.SyncStateContract.Helpers.insert
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.plannerproject.api.MarsApiService
@@ -13,7 +11,10 @@ import kotlinx.coroutines.launch
 
 class HomeFragmentView( val database: CardDao , application: Application) : AndroidViewModel(application) {
 
-    private val cardsLiveData= database.getAll()
+    private val _property = MutableLiveData<List<CardEntity>>()
+    val property:LiveData<List<CardEntity>> = _property
+
+    private val cardsLiveData= property
 
     private val text = MutableLiveData("")
 
@@ -50,12 +51,10 @@ class HomeFragmentView( val database: CardDao , application: Application) : Andr
         database.clear()
     }
 
-
-
-     suspend fun insert(task:String, aboutTask:String) {
+    suspend fun insert(task:String, aboutTask:String) {
          database.insert(CardEntity(task,aboutTask))
+        MarsApiService.MarsApi.retrofitService.addTask(CardEntity(task,aboutTask))
      }
-
 
     fun onSwipeDelete(card: CardEntity?){
         viewModelScope.launch {
@@ -64,35 +63,33 @@ class HomeFragmentView( val database: CardDao , application: Application) : Andr
             }
         }
     }
-
      suspend fun delete(card:CardEntity){
         database.delete(card)
+//        MarsApiService.MarsApi.retrofitService.deleteById(card.id)
     }
-
     fun onQueryTextChange(text: String?) {
         this.text.value = text
     }
-    //Retrofit
-    private val _property = MutableLiveData<List<MarsProperty>>()
-    val property:LiveData<List<MarsProperty>> = _property
+
 
     private val _response = MutableLiveData<String>()
     val response: LiveData<String> = _response
 
-    init {
-        viewModelScope.launch {
-            getMarsRealEstateProperties()
-        }
+init {
+    viewModelScope.launch {
+        getMarsRealEstateProperties()
     }
+}
 
-    private suspend fun getMarsRealEstateProperties() {
+private suspend fun getMarsRealEstateProperties() {
         try {
             val listResult = MarsApiService.MarsApi.retrofitService.getProperties()
             _response.value = "Success: ${listResult.size} Mars properties retrieved"
             _property.value = listResult
-        } catch (e: Exception) {
+            Log.d("RESPONCE",_response.value.toString())
+        }catch (e: Exception) {
+            Log.d("ERROR",e.toString())
             _response.value = "Failure: ${e.message}"
         }
     }
-
 }

@@ -1,13 +1,17 @@
 package com.example.plannerproject.api
 
-import MarsProperty
+import com.example.plannerproject.database.CardEntity
 import com.squareup.moshi.Moshi
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.POST
 
-private const val BASE_URL ="https://android-kotlin-fun-mars-server.appspot.com";
+//Requests
+private const val BASE_URL ="http://127.0.1.1:5000/api/"
 
 private val moshi  = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -19,9 +23,17 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface MarsApiService{
-    @GET("realestate")
+    @GET("all")
     suspend fun getProperties():
-            List<MarsProperty>
+            List<CardEntity>
+    @POST("add")
+    suspend fun addTask(@Body card:CardEntity)
+
+    @DELETE("deleteAll")
+    suspend fun deleteAll();
+
+//    @DELETE("delete/{id}")
+//    suspend fun deleteById(@Path("id")id:Int);
 
     object MarsApi{
         val retrofitService:MarsApiService by lazy {

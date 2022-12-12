@@ -10,19 +10,17 @@ import com.example.plannerproject.R
 import com.example.plannerproject.databinding.ListItemBinding
 
 class ItemAdapter:ListAdapter<CardEntity,ItemAdapter.ViewHolder>(CardDiffCallback()){
-
      class ViewHolder(private val binding:ListItemBinding):RecyclerView.ViewHolder(binding.root){
-        fun bind(card:CardEntity)=with(binding){
-            mTitle.text = card.task
-            mSubTitle.text = card.aboutTask
+         fun bind(card:CardEntity){
+             binding.mTitle.text = card.task
+            binding.mSubTitle.text = card.description
+         }
 
-            }
         companion object{
-            fun create (parent:ViewGroup):ViewHolder{
-                return ViewHolder(ListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
-            }
+                fun create (parent:ViewGroup):ViewHolder{
+                    return ViewHolder(ListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+                }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

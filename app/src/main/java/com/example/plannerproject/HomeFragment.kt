@@ -37,10 +37,12 @@ class  HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home2, container, false)
         val link = view.findViewById<TextView>(R.id.table)
         val binding:FragmentHome2Binding = FragmentHome2Binding.bind(view)
+
         //implement viewModel
         val application = requireNotNull(this.activity).application
         val dataSource = CardDatabase.getInstance(application)!!.cardDao()
@@ -48,10 +50,9 @@ class  HomeFragment : Fragment() {
         val vm = ViewModelProvider(this,vmFactory).get(HomeFragmentView::class.java)
 
 
-
         // show all recycleView cards
-//        val recyclerView = binding.recyclerView
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
+        val recyclerView = binding.recyclerView
+
         vm.filteredCards.observe(viewLifecycleOwner) {
             newAdapter= ItemAdapter()
             newAdapter.submitList(it)
@@ -72,9 +73,7 @@ class  HomeFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
 
-       // search tab
-//        val searchView = binding.searchView
-        val searchView = view.findViewById<SearchView>(R.id.searchView)
+        val searchView = binding.searchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(text: String?): Boolean {
                 searchView.clearFocus()
