@@ -30,7 +30,6 @@ class AddCardDialogFragment : DialogFragment() {
         binding.backCard.setOnClickListener {
             dismiss()
         }
-
         //implement viewModel
         val application = requireNotNull(this.activity).application
         val dataSource = CardDatabase.getInstance(application)!!.cardDao()
@@ -40,7 +39,6 @@ class AddCardDialogFragment : DialogFragment() {
         binding.saveCard.setOnClickListener {
             val newCardTask = rootView.findViewById<EditText>(R.id.newCardTask).text.toString()
             val newCardDesc = rootView.findViewById<EditText>(R.id.newCardDesc).text.toString()
-
             vm.onClickInsert(newCardTask,newCardDesc)
 
             Toast.makeText(context,"Succesfully added new $newCardTask card.",Toast.LENGTH_LONG).show()
@@ -53,8 +51,7 @@ class AddCardDialogFragment : DialogFragment() {
                     "message" to "A new todo has been created!")
                 )
                 .build()
-            WorkManager.getInstance(requireContext()).enqueue(myWorkRequest)
-
+              WorkManager.getInstance(requireContext()).enqueue(myWorkRequest)
 
             dismiss()
 

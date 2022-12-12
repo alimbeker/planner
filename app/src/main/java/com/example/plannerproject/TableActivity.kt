@@ -17,7 +17,7 @@ class TableActivity : AppCompatActivity() {
             val task: TextView = findViewById(R.id.list)
             val cardText: TextView = findViewById(R.id.mText)
             task.text = cards.task
-            cardText.text = cards.aboutTask
+            cardText.text = cards.description
         }
         /*val view = inflater.inflate(R.layout.fragment_table, container, false)
         val link = view.findViewById<TextView>(R.id.cross)

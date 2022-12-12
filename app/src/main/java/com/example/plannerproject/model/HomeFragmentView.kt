@@ -14,7 +14,7 @@ class HomeFragmentView( val database: CardDao , application: Application) : Andr
     private val _property = MutableLiveData<List<CardEntity>>()
     val property:LiveData<List<CardEntity>> = _property
 
-    private val cardsLiveData= property
+    private val cardsLiveData= database.getAll()
 
     private val text = MutableLiveData("")
 
@@ -39,6 +39,9 @@ class HomeFragmentView( val database: CardDao , application: Application) : Andr
         viewModelScope.launch {
             insert(task, aboutTask)
         }
+        viewModelScope.launch {
+            getMarsRealEstateProperties()
+        }
     }
 
     fun onClear() {
@@ -49,6 +52,8 @@ class HomeFragmentView( val database: CardDao , application: Application) : Andr
 
     suspend fun clear() {
         database.clear()
+        MarsApiService.MarsApi.retrofitService.deleteAll();
+        getMarsRealEstateProperties()
     }
 
     suspend fun insert(task:String, aboutTask:String) {
@@ -65,7 +70,6 @@ class HomeFragmentView( val database: CardDao , application: Application) : Andr
     }
      suspend fun delete(card:CardEntity){
         database.delete(card)
-//        MarsApiService.MarsApi.retrofitService.deleteById(card.id)
     }
     fun onQueryTextChange(text: String?) {
         this.text.value = text

@@ -17,7 +17,7 @@ class ItemAdapter:ListAdapter<CardEntity,ItemAdapter.ViewHolder>(CardDiffCallbac
     class ViewHolder(private val binding:ListItemBinding):RecyclerView.ViewHolder(binding.root){
          fun bind(card:CardEntity){
              binding.mTitle.text = card.task
-            binding.mSubTitle.text = card.description
+            binding.color.text = card.description
          }
 
         companion object{

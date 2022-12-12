@@ -59,6 +59,7 @@ class  HomeFragment : Fragment() {
             newAdapter= ItemAdapter()
             newAdapter.submitList(it)
             recyclerView.adapter=newAdapter
+
             recyclerView.layoutManager=LinearLayoutManager(this.context)
             newAdapter.onItemClick = {
                 val intent = Intent(this.context, TableActivity::class.java)
