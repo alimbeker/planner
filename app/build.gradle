@@ -85,6 +85,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.1.0'
     //test
     testImplementation 'junit:junit:4.13.2'
+    testImplementation "com.google.truth:truth:1.1.2"
+
+    //androidtestImplementation
+
 
     implementation("androidx.work:work-runtime-ktx:2.7.1")
 }
