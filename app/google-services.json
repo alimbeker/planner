@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "461552159035",
+    "project_id": "plannerproject-2694a",
+    "storage_bucket": "plannerproject-2694a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:461552159035:android:a92d66f8528491e7facf1e",
+        "android_client_info": {
+          "package_name": "com.example.plannerproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "461552159035-9g8300j7r30c05nkcd9ei08560mga5vv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD09lOmI6D7aYKivhddezuEVP-i04AxlFw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "461552159035-9g8300j7r30c05nkcd9ei08560mga5vv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

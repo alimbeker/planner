@@ -19,15 +19,17 @@
         android:id="@+id/user_name"
         android:paddingTop="8dp"
         android:textSize="20dp"
-        android:text="Batyrbek Galymbek"
+        android:text="You are Logged in as"
         android:textColor="@color/black"
         android:textStyle="bold"/>
 
     <TextView
+        android:id="@+id/loggedtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16dp"
-        android:text="galymbek.batyrbekk@gmail.com"/>
+        />
+<!--    android:text="galymbek.batyrbekk@gmail.com"-->
 
     <View
         android:layout_width="match_parent"

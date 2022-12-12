@@ -1,6 +1,7 @@
 package com.example.plannerproject
 
 import SwipeToDelete
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -50,6 +51,7 @@ class  HomeFragment : Fragment() {
         val vm = ViewModelProvider(this,vmFactory).get(HomeFragmentView::class.java)
 
 
+
         // show all recycleView cards
         val recyclerView = binding.recyclerView
 
@@ -58,7 +60,14 @@ class  HomeFragment : Fragment() {
             newAdapter.submitList(it)
             recyclerView.adapter=newAdapter
             recyclerView.layoutManager=LinearLayoutManager(this.context)
+            newAdapter.onItemClick = {
+                val intent = Intent(this.context, TableActivity::class.java)
+                intent.putExtra("cards", it)
+                startActivity(intent)
+            }
         }
+
+
 
         recyclerView.setHasFixedSize(true)
         val swipeToDelete = object :SwipeToDelete(){
